@@ -36,7 +36,7 @@ public class Inicio extends javax.swing.JFrame {
         Buscar = new javax.swing.JButton();
         InputBuscar = new javax.swing.JTextField();
         BusquedaHash = new javax.swing.JRadioButton();
-        BusquedaArbol1 = new javax.swing.JRadioButton();
+        BusquedaArbol = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -59,6 +59,11 @@ public class Inicio extends javax.swing.JFrame {
         jPanel1.add(DeterminarEspecie, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, -1, -1));
 
         Buscar.setText("Buscar");
+        Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarActionPerformed(evt);
+            }
+        });
         jPanel1.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, -1, -1));
         jPanel1.add(InputBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, 150, -1));
 
@@ -67,11 +72,11 @@ public class Inicio extends javax.swing.JFrame {
         BusquedaHash.setToolTipText("");
         jPanel1.add(BusquedaHash, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 370, -1, -1));
 
-        buttonGroup1.add(BusquedaArbol1);
-        BusquedaArbol1.setSelected(true);
-        BusquedaArbol1.setText("Por Arbol");
-        BusquedaArbol1.setToolTipText("");
-        jPanel1.add(BusquedaArbol1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, -1, -1));
+        buttonGroup1.add(BusquedaArbol);
+        BusquedaArbol.setSelected(true);
+        BusquedaArbol.setText("Por Arbol");
+        BusquedaArbol.setToolTipText("");
+        jPanel1.add(BusquedaArbol, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, -1, -1));
 
         jLabel3.setText("Metodo de busqueda:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, -1, -1));
@@ -80,6 +85,17 @@ public class Inicio extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
+        String valorPorBuscar = InputBuscar.getText();
+        InputBuscar.setText("");
+        
+        if (BusquedaArbol.isSelected()) {
+            //Busqueda por Arbol
+        } else if (BusquedaHash.isSelected()) {
+            //Busqueda por Hash
+        }
+    }//GEN-LAST:event_BuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -118,7 +134,7 @@ public class Inicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Buscar;
-    private javax.swing.JRadioButton BusquedaArbol1;
+    private javax.swing.JRadioButton BusquedaArbol;
     private javax.swing.JRadioButton BusquedaHash;
     private javax.swing.JButton DeterminarEspecie;
     private javax.swing.JTextField InputBuscar;
