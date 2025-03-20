@@ -6,7 +6,7 @@ package clavedicotomica;
 
 /**
  *
- * @author adcd_
+ * @author Freya Blanca, Jesús Schneider, Marcelo Pineiro
  */
 public class ClaveDicotomica {
 
