@@ -4,6 +4,16 @@
  */
 package clavedicotomica;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.StringReader;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+//import javax.json.Json;
+//import javax.json.JsonException;
+//import javax.json.JsonReader;
+
 /**
  *
  * @author Freya Blanca, Jesús Schneider, Marcelo Pineiro
@@ -59,15 +69,66 @@ public class Home extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Cargar Arbol");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, -1, -1));
 
         CargarArbol.setText("cargar arbol");
-        jPanel1.add(CargarArbol, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, -1, -1));
+        CargarArbol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CargarArbolActionPerformed(evt);
+            }
+        });
+        jPanel1.add(CargarArbol, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 480));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CargarArbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarArbolActionPerformed
+        JFileChooser fileChooser = new JFileChooser();   
+        // Filtro para solo archivos JSON
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(
+            "Archivos JSON (*.json)", "json"));
+
+        int result = fileChooser.showOpenDialog(this);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            try (BufferedReader reader = new BufferedReader(new FileReader(selectedFile))) {
+
+                // Leer contenido del archivo
+                StringBuilder content = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    content.append(line);
+                }
+
+                // Validar JSON con javax.json
+    //            try (JsonReader jsonReader = Json.createReader(new StringReader(content.toString()))) {
+    //                jsonReader.read(); // Intenta parsear el JSON
+    //                JOptionPane.showMessageDialog(this, 
+    //                    "Archivo válido: " + selectedFile.getName(),
+    //                    "Éxito", 
+    //                    JOptionPane.INFORMATION_MESSAGE);
+    //            }
+
+    //        } catch (JsonException ex) {
+    //            JOptionPane.showMessageDialog(this,
+    //                "Error en JSON: " + ex.getMessage(),
+    //                "Error de sintaxis",
+    //                JOptionPane.ERROR_MESSAGE);
+                Inicio i = new Inicio();
+                i.setVisible(true);
+                this.setVisible(false);
+                
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this,
+                    "Error al leer archivo: " + ex.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            } 
+        }
+    }//GEN-LAST:event_CargarArbolActionPerformed
 
     /**
      * @param args the command line arguments
