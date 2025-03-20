@@ -4,6 +4,8 @@
  */
 package clavedicotomica;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author adcd_
@@ -88,13 +90,21 @@ public class Inicio extends javax.swing.JFrame {
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         String valorPorBuscar = InputBuscar.getText();
-        InputBuscar.setText("");
+        if (valorPorBuscar.isEmpty() || valorPorBuscar.contains(" ")) {
+            JOptionPane.showMessageDialog(this, "Texto inválido", "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            InputBuscar.setText("");
         
-        if (BusquedaArbol.isSelected()) {
-            //Busqueda por Arbol
-        } else if (BusquedaHash.isSelected()) {
-            //Busqueda por Hash
+            if (BusquedaArbol.isSelected()) {
+                //Busqueda por Arbol
+            } else if (BusquedaHash.isSelected()) {
+                //Busqueda por Hash
+            }
+
+            Resultados r = new Resultados();
+            r.setVisible(true);
         }
+        
     }//GEN-LAST:event_BuscarActionPerformed
 
     /**
