@@ -10,9 +10,9 @@ import java.io.FileReader;
 import java.io.StringReader;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-//import javax.json.Json;
-//import javax.json.JsonException;
-//import javax.json.JsonReader;
+import javax.json.Json;
+import javax.json.JsonException;
+import javax.json.JsonReader;
 
 /**
  *
@@ -103,23 +103,25 @@ public class Home extends javax.swing.JFrame {
                     content.append(line);
                 }
 
-                // Validar JSON con javax.json
-    //            try (JsonReader jsonReader = Json.createReader(new StringReader(content.toString()))) {
-    //                jsonReader.read(); // Intenta parsear el JSON
-    //                JOptionPane.showMessageDialog(this, 
-    //                    "Archivo válido: " + selectedFile.getName(),
-    //                    "Éxito", 
-    //                    JOptionPane.INFORMATION_MESSAGE);
-    //            }
+                //Validar JSON con javax.json
+                try (JsonReader jsonReader = Json.createReader(new StringReader(content.toString()))) {
+                    jsonReader.read();
+                    JOptionPane.showMessageDialog(this, 
+                        "Archivo válido: " + selectedFile.getName(),
+                        "Éxito", 
+                        JOptionPane.INFORMATION_MESSAGE);
 
-    //        } catch (JsonException ex) {
-    //            JOptionPane.showMessageDialog(this,
-    //                "Error en JSON: " + ex.getMessage(),
-    //                "Error de sintaxis",
-    //                JOptionPane.ERROR_MESSAGE);
-                Inicio i = new Inicio();
-                i.setVisible(true);
-                this.setVisible(false);
+                    Inicio i = new Inicio();
+                    i.setVisible(true);
+                    this.setVisible(false);
+                }
+
+            } catch (JsonException ex) {
+                JOptionPane.showMessageDialog(this,
+                    "Error en JSON: " + ex.getMessage(),
+                    "Error de sintaxis",
+                    JOptionPane.ERROR_MESSAGE);
+                
                 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this,

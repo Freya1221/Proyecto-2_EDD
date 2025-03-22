@@ -14,7 +14,8 @@ public class ClaveDicotomica {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Home h = new Home();
+        h.setVisible(true);
     }
     
 }
