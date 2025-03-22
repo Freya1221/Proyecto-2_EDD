@@ -60,7 +60,7 @@ public class Home extends javax.swing.JFrame {
         jLabel1.setText("Clave Dicotomica");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, -1, 40));
 
-        jLabel7.setText("Jesús Schneider");
+        jLabel7.setText("Marcelo Piñeiro");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 440, -1, -1));
 
         jLabel8.setText("Integrantes:");
@@ -111,51 +111,44 @@ public class Home extends javax.swing.JFrame {
                 try (JsonReader jsonReader = Json.createReader(new StringReader(content.toString()))) {
                     JsonObject root = jsonReader.readObject();
                     String primeraClave = root.keySet().iterator().next();
-                    
-                    JOptionPane.showMessageDialog(this, 
+
+                    JOptionPane.showMessageDialog(this,
                         "Archivo válido: " + selectedFile.getName(),
-                        "Éxito", 
+                        "Éxito",
                         JOptionPane.INFORMATION_MESSAGE);
-                    
-                    
+
                     // Obtener el array de árboles
                     JsonArray arbolesArray = root.getJsonArray(primeraClave);
                     for (JsonValue arbolValue : arbolesArray) {
-                        // Convertir cada valor del array a un objeto JSON
                         JsonObject arbolJson = arbolValue.asJsonObject();
-                        // Obtener el nombre del árbol (primera clave del objeto JSON)
                         String nombreArbol = arbolJson.keySet().iterator().next();
-                        System.out.println("Árbol: " + nombreArbol);
-                        
-                        String ArbolAnterior = "";
+                        //System.out.println("Árbol: " + nombreArbol);
+
                         String PreguntaAnterior = "";
                         boolean ValorAnterior = true;
+
                         // Obtener el array de características del árbol
                         JsonArray caracteristicasArray = arbolJson.getJsonArray(nombreArbol);
                         for (JsonValue caracteristicaValue : caracteristicasArray) {
                             JsonObject caracteristicaJson = caracteristicaValue.asJsonObject();
-
                             String pregunta = caracteristicaJson.keySet().iterator().next();
                             boolean respuesta = caracteristicaJson.getBoolean(pregunta);
-                            System.out.println("- " + pregunta + ": " + respuesta);
-                            
-                            if (ArbolAnterior == ""){
-                                AB.insertar(pregunta, "", true);
-                            }else{
-                                AB.insertar(pregunta, PreguntaAnterior, ValorAnterior);
-                            }
-                            
-                            PreguntaAnterior = pregunta;
-                            ValorAnterior = respuesta;                           
-                        }
-                        AB.insertar(nombreArbol, PreguntaAnterior, ValorAnterior);
-                        ArbolAnterior = nombreArbol;
-                    }
-                    
+                            //System.out.println("- " + pregunta + ": " + respuesta);
 
-                    Inicio i = new Inicio(); // Pasar el JSON a Inicio
-                    i.setVisible(true);
-                    this.setVisible(false);
+                            // Insertar la pregunta en el árbol binario
+                            AB.insertar(pregunta, PreguntaAnterior, ValorAnterior);
+
+                            // Actualizar la pregunta anterior y su valor
+                            PreguntaAnterior = pregunta;
+                            ValorAnterior = respuesta;
+                        }
+
+                        // Insertar el nombre del árbol como un nodo final
+                        AB.insertar(nombreArbol, PreguntaAnterior, ValorAnterior);
+                    }
+
+                    
+                    AB.recorrerPreorden(AB.getRaiz());
                 }
 
             } catch (JsonException ex) {
