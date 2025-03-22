@@ -83,24 +83,31 @@ public class ArbolBinario {
         }
     }
     
-    public void preguntar(Inicio pantalla, Nodo nodo){
+    public void preguntar(Inicio pantalla, Nodo nodo, String historial){
         if (nodo.getDerechoFalse() == null && nodo.getIzquierdoTrue() == null){
-            JOptionPane.showMessageDialog(pantalla, nodo.getPregunta());
+            
+            String encontrado = nodo.getPregunta();
+            encontrado = "Arbol encontrado:\n" + encontrado + "\n\nPreguntas:" + historial;
+            JOptionPane.showMessageDialog(pantalla, encontrado);
         } else{
+            
+            String encontrado = nodo.getPregunta();
             int respuesta = JOptionPane.showConfirmDialog(
                 pantalla,
-                nodo.getPregunta(),
+                encontrado,
                 "Clave Dicotómica",
                 JOptionPane.YES_NO_OPTION
             );
         
-        
+            
             if (respuesta == JOptionPane.YES_OPTION) {
+                historial = historial + "\n" + encontrado + ": True";
                 nodo = nodo.getIzquierdoTrue();
-                preguntar(pantalla, nodo);
+                preguntar(pantalla, nodo, historial);
             } else if (respuesta == JOptionPane.NO_OPTION) {
+                historial = historial + "\n" + encontrado + ": False";
                 nodo = nodo.getDerechoFalse();
-                preguntar(pantalla, nodo);
+                preguntar(pantalla, nodo, historial);
             }
         }
     }

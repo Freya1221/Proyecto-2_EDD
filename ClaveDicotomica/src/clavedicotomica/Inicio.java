@@ -125,7 +125,8 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_MostrarArbolActionPerformed
 
     private void DeterminarEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeterminarEspecieActionPerformed
-        AB.preguntar(this, AB.getRaiz());
+        String historial = "";
+        AB.preguntar(this, AB.getRaiz(), historial);
     }//GEN-LAST:event_DeterminarEspecieActionPerformed
 
     /**
