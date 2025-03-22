@@ -115,13 +115,25 @@ public class Home extends javax.swing.JFrame {
                         "Éxito", 
                         JOptionPane.INFORMATION_MESSAGE);
                     
-                    System.out.println(primeraClave);
                     
+                    // Obtener el array de árboles
                     JsonArray arbolesArray = root.getJsonArray(primeraClave);
                     for (JsonValue arbolValue : arbolesArray) {
+                        // Convertir cada valor del array a un objeto JSON
                         JsonObject arbolJson = arbolValue.asJsonObject();
+                        // Obtener el nombre del árbol (primera clave del objeto JSON)
                         String nombreArbol = arbolJson.keySet().iterator().next();
                         System.out.println("Árbol: " + nombreArbol);
+
+                        // Obtener el array de características del árbol
+                        JsonArray caracteristicasArray = arbolJson.getJsonArray(nombreArbol);
+                        for (JsonValue caracteristicaValue : caracteristicasArray) {
+                            JsonObject caracteristicaJson = caracteristicaValue.asJsonObject();
+
+                            String pregunta = caracteristicaJson.keySet().iterator().next();
+                            boolean respuesta = caracteristicaJson.getBoolean(pregunta);
+                            System.out.println("- " + pregunta + ": " + respuesta);
+                        }
                     }
                     
 
