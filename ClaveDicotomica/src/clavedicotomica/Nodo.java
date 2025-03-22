@@ -55,6 +55,14 @@ public class Nodo {
         this.especie = especie;
     }
     
+    /**
+    * Verifica si este nodo es una hoja en el árbol.
+    *
+    */
+    public boolean esHoja() {
+        return (izquierdoTrue == null && derechoFalse == null) || especie != null;
+    }
+    
     
     
 }

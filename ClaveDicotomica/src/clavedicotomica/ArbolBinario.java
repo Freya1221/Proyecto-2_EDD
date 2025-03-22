@@ -26,9 +26,9 @@ public class ArbolBinario {
         Nodo padre = buscarNodo(raiz, respuestaPadre);
         if (padre != null) {
             if (esHijoIzquierdo) {
-                padre.setIzquierdo(nuevoNodo);
+                padre.setIzquierdoTrue(nuevoNodo);
             } else {
-                padre.setDerecho(nuevoNodo);
+                padre.setDerechoFalse(nuevoNodo);
             }
         }
     }
@@ -36,17 +36,17 @@ public class ArbolBinario {
     // Buscar un nodo por su dato (recorrido preorden)
     private Nodo buscarNodo(Nodo actual, String dato) {
         if (actual == null) return null;
-        if (actual.getDato().equals(dato)) return actual;
-        Nodo encontradoIzq = buscarNodo(actual.getIzquierdo(), dato);
-        return (encontradoIzq != null) ? encontradoIzq : buscarNodo(actual.getDerecho(), dato);
+        if (actual.getPregunta().equals(dato)) return actual;
+        Nodo encontradoIzq = buscarNodo(actual.getIzquierdoTrue(), dato);
+        return (encontradoIzq != null) ? encontradoIzq : buscarNodo(actual.getDerechoFalse(), dato);
     }
 
     // Recorrer el árbol (Preorden)
     public void recorrerPreorden(Nodo nodo) {
         if (nodo != null) {
-            System.out.println(nodo.getDato());
-            recorrerPreorden(nodo.getIzquierdo());
-            recorrerPreorden(nodo.getDerecho());
+            System.out.println(nodo.getPregunta());
+            recorrerPreorden(nodo.getIzquierdoTrue());
+            recorrerPreorden(nodo.getDerechoFalse());
         }
     }
 
