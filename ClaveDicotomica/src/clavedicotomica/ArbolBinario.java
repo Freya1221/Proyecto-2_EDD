@@ -4,6 +4,8 @@
  */
 package clavedicotomica;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Freya Blanca, Jesús Schneider, Marcelo Pineiro
@@ -80,7 +82,30 @@ public class ArbolBinario {
             recorrerPreorden(nodo.getDerechoFalse());
         }
     }
-
+    
+    public void preguntar(Inicio pantalla, Nodo nodo){
+        if (nodo.getDerechoFalse() == null && nodo.getIzquierdoTrue() == null){
+            JOptionPane.showMessageDialog(pantalla, nodo.getPregunta());
+        } else{
+            int respuesta = JOptionPane.showConfirmDialog(
+                pantalla,
+                nodo.getPregunta(),
+                "Clave Dicotómica",
+                JOptionPane.YES_NO_OPTION
+            );
+        
+        
+            if (respuesta == JOptionPane.YES_OPTION) {
+                nodo = nodo.getIzquierdoTrue();
+                preguntar(pantalla, nodo);
+            } else if (respuesta == JOptionPane.NO_OPTION) {
+                nodo = nodo.getDerechoFalse();
+                preguntar(pantalla, nodo);
+            }
+        }
+    }
+    
+    
     // Getters y setters
     public Nodo getRaiz() {
         return raiz;

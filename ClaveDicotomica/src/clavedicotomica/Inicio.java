@@ -15,7 +15,10 @@ public class Inicio extends javax.swing.JFrame {
     /**
      * Creates new form Inicio
      */
-    public Inicio() {
+    
+    private ArbolBinario AB;
+    public Inicio(ArbolBinario AB) {
+        this.AB = AB;
         initComponents();
         setLocationRelativeTo(null); //CEntrar ventana
     }
@@ -55,9 +58,19 @@ public class Inicio extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, -1, -1));
 
         MostrarArbol.setText(" Mostrar como árbol");
+        MostrarArbol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MostrarArbolActionPerformed(evt);
+            }
+        });
         jPanel1.add(MostrarArbol, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, -1));
 
         DeterminarEspecie.setText("Determinar especie");
+        DeterminarEspecie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeterminarEspecieActionPerformed(evt);
+            }
+        });
         jPanel1.add(DeterminarEspecie, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, -1, -1));
 
         Buscar.setText("Buscar");
@@ -107,6 +120,14 @@ public class Inicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_BuscarActionPerformed
 
+    private void MostrarArbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarArbolActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MostrarArbolActionPerformed
+
+    private void DeterminarEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeterminarEspecieActionPerformed
+        AB.preguntar(this, AB.getRaiz());
+    }//GEN-LAST:event_DeterminarEspecieActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -137,7 +158,8 @@ public class Inicio extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Inicio().setVisible(true);
+                ArbolBinario AB = new ArbolBinario();
+                new Inicio(AB).setVisible(true);
             }
         });
     }

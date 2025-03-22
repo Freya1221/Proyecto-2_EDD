@@ -149,6 +149,10 @@ public class Home extends javax.swing.JFrame {
 
                     
                     AB.recorrerPreorden(AB.getRaiz());
+                    
+                    Inicio i = new Inicio(AB);
+                    i.setVisible(true);
+                    this.setVisible(false);
                 }
 
             } catch (JsonException ex) {
