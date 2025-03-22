@@ -9,41 +9,52 @@ package clavedicotomica;
  * @author Freya Blanca, Jesús Schneider, Marcelo Pineiro
  */
 public class Nodo {
-    private String dato;       // Almacena la pregunta o valor
-    private Nodo izquierdo;    // Hijo izquierdo
-    private Nodo derecho;      // Hijo derecho
+    private String pregunta;       // Almacena la pregunta
+    private Nodo izquierdoTrue;    // Hijo izquierdo
+    private Nodo derechoFalse;      // Hijo derecho
+    private String especie; // Solo en nodos hoja
     
     // Constructor
-    public Nodo(String dato) {
-        this.dato = dato;
-        this.izquierdo = null;
-        this.derecho = null;
+    public Nodo(String pregunta) {
+        this.pregunta = pregunta;
+        this.izquierdoTrue = null;
+        this.derechoFalse = null;
+        this.especie = null;
     }
     
     // Getters y setters
-    public String getDato() {
-        return dato;
+    public String getPregunta() {
+        return pregunta;
     }
 
-    public void setDato(String dato) {
-        this.dato = dato;
+    public void setPregunta(String pregunta) {
+        this.pregunta = pregunta;
     }
 
-    public Nodo getIzquierdo() {
-        return izquierdo;
+    public Nodo getIzquierdoTrue() {
+        return izquierdoTrue;
     }
 
-    public void setIzquierdo(Nodo izquierdo) {
-        this.izquierdo = izquierdo;
+    public void setIzquierdoTrue(Nodo izquierdoTrue) {
+        this.izquierdoTrue = izquierdoTrue;
     }
 
-    public Nodo getDerecho() {
-        return derecho;
+    public Nodo getDerechoFalse() {
+        return derechoFalse;
     }
 
-    public void setDerecho(Nodo derecho) {
-        this.derecho = derecho;
+    public void setDerechoFalse(Nodo derechoFalse) {
+        this.derechoFalse = derechoFalse;
     }
+
+    public String getEspecie() {
+        return especie;
+    }
+
+    public void setEspecie(String especie) {
+        this.especie = especie;
+    }
+    
     
     
 }
