@@ -26,6 +26,8 @@ public class Home extends javax.swing.JFrame {
     /**
      * Creates new form Home
      */
+    ArbolBinario AB = new ArbolBinario();
+    
     public Home() {
         initComponents();
         setLocationRelativeTo(null); //CEntrar ventana
@@ -124,7 +126,10 @@ public class Home extends javax.swing.JFrame {
                         // Obtener el nombre del árbol (primera clave del objeto JSON)
                         String nombreArbol = arbolJson.keySet().iterator().next();
                         System.out.println("Árbol: " + nombreArbol);
-
+                        
+                        String ArbolAnterior = "";
+                        String PreguntaAnterior = "";
+                        boolean ValorAnterior = true;
                         // Obtener el array de características del árbol
                         JsonArray caracteristicasArray = arbolJson.getJsonArray(nombreArbol);
                         for (JsonValue caracteristicaValue : caracteristicasArray) {
@@ -133,7 +138,18 @@ public class Home extends javax.swing.JFrame {
                             String pregunta = caracteristicaJson.keySet().iterator().next();
                             boolean respuesta = caracteristicaJson.getBoolean(pregunta);
                             System.out.println("- " + pregunta + ": " + respuesta);
+                            
+                            if (ArbolAnterior == ""){
+                                AB.insertar(pregunta, "", true);
+                            }else{
+                                AB.insertar(pregunta, PreguntaAnterior, ValorAnterior);
+                            }
+                            
+                            PreguntaAnterior = pregunta;
+                            ValorAnterior = respuesta;                           
                         }
+                        AB.insertar(nombreArbol, PreguntaAnterior, ValorAnterior);
+                        ArbolAnterior = nombreArbol;
                     }
                     
 
