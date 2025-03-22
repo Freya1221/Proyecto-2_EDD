@@ -107,14 +107,15 @@ public class Inicio extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Texto inválido", "Error", JOptionPane.ERROR_MESSAGE);
         }else{
             InputBuscar.setText("");
-        
+            Nodo respuesta = null;
             if (BusquedaArbol.isSelected()) {
                 //Busqueda por Arbol
+                respuesta = AB.buscar(AB.getRaiz(),valorPorBuscar);
             } else if (BusquedaHash.isSelected()) {
                 //Busqueda por Hash
             }
 
-            Resultados r = new Resultados();
+            Resultados r = new Resultados(respuesta);
             r.setVisible(true);
         }
         

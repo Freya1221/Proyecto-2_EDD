@@ -13,9 +13,13 @@ public class Resultados extends javax.swing.JFrame {
     /**
      * Creates new form Resultados
      */
-    public Resultados() {
+    Nodo respuesta;
+    public Resultados(Nodo respuesta) {
+        this.respuesta = respuesta;
         initComponents();
         setLocationRelativeTo(null); //CEntrar ventana
+        
+        TextoResultado.setText(respuesta.getPregunta());
     }
 
     /**
@@ -30,7 +34,7 @@ public class Resultados extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         Close = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        TextoResultado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -50,9 +54,9 @@ public class Resultados extends javax.swing.JFrame {
         });
         jPanel1.add(Close, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("No se encontraron resultados");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+        TextoResultado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        TextoResultado.setText("No se encontraron resultados");
+        jPanel1.add(TextoResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 320));
 
@@ -93,15 +97,16 @@ public class Resultados extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Resultados().setVisible(true);
+                Nodo respuesta = new Nodo("");
+                new Resultados(respuesta).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Close;
+    private javax.swing.JLabel TextoResultado;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

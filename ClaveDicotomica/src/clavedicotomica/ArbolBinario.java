@@ -58,7 +58,7 @@ public class ArbolBinario {
     }
     
     
-    private Nodo buscar(Nodo actual, String dato) {
+    public Nodo buscar(Nodo actual, String dato) {
         if (actual == null) {
             return null;
         }
