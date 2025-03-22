@@ -11,8 +11,11 @@ import java.io.StringReader;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.json.Json;
+import javax.json.JsonArray;
 import javax.json.JsonException;
+import javax.json.JsonObject;
 import javax.json.JsonReader;
+import javax.json.JsonValue;
 
 /**
  *
@@ -103,15 +106,25 @@ public class Home extends javax.swing.JFrame {
                     content.append(line);
                 }
 
-                //Validar JSON con javax.json
                 try (JsonReader jsonReader = Json.createReader(new StringReader(content.toString()))) {
-                    jsonReader.read();
+                    JsonObject root = jsonReader.readObject();
+                    String primeraClave = root.keySet().iterator().next();
+                    
                     JOptionPane.showMessageDialog(this, 
                         "Archivo válido: " + selectedFile.getName(),
                         "Éxito", 
                         JOptionPane.INFORMATION_MESSAGE);
+                    
+                    System.out.println(primeraClave);
+                    JsonArray arbolesArray = root.getJsonArray(primeraClave);
+                    for (JsonValue arbolValue : arbolesArray) {
+                        JsonObject arbolJson = arbolValue.asJsonObject();
+                        String nombreArbol = arbolJson.keySet().iterator().next();
+                        System.out.println("Árbol: " + nombreArbol);
+                    }
+                    
 
-                    Inicio i = new Inicio();
+                    Inicio i = new Inicio(); // Pasar el JSON a Inicio
                     i.setVisible(true);
                     this.setVisible(false);
                 }
