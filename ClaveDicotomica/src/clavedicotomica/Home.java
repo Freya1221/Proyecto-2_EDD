@@ -116,6 +116,7 @@ public class Home extends javax.swing.JFrame {
                         JOptionPane.INFORMATION_MESSAGE);
                     
                     System.out.println(primeraClave);
+                    
                     JsonArray arbolesArray = root.getJsonArray(primeraClave);
                     for (JsonValue arbolValue : arbolesArray) {
                         JsonObject arbolJson = arbolValue.asJsonObject();
