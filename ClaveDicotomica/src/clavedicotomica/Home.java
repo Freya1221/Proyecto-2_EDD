@@ -145,6 +145,14 @@ public class Home extends javax.swing.JFrame {
 
                         // Insertar el nombre del árbol como un nodo final
                         AB.insertar(nombreArbol, PreguntaAnterior, ValorAnterior);
+                        
+                        
+                        Nodo nodoEspecie = AB.buscar(AB.getRaiz(), nombreArbol);
+            
+                        // Insertar en la tabla hash (si se encontró el nodo)
+                        if (nodoEspecie != null) {
+                            AB.agregarEspecieATabla(nombreArbol, nodoEspecie);
+                        }
                     }
 
                     

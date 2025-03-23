@@ -15,10 +15,12 @@ import org.graphstream.graph.Node;
  */
 public class ArbolBinario {
     private Nodo raiz;  // Raíz del árbol
+    private TablaHash tablaEspecies;
 
     // Constructor
     public ArbolBinario() {
         this.raiz = null;
+        this.tablaEspecies = new TablaHash();
     }
     
     public boolean existeNodo(String dato) {
@@ -100,7 +102,7 @@ public class ArbolBinario {
     // Recorrer el árbol (Preorden)
     public void recorrerPreorden(Nodo nodo) {
         if (nodo != null) {
-            System.out.println(nodo.getPregunta());
+            //System.out.println(nodo.getPregunta());
             recorrerPreorden(nodo.getIzquierdoTrue());
             recorrerPreorden(nodo.getDerechoFalse());
         }
@@ -156,6 +158,15 @@ public class ArbolBinario {
             construirGrafo(nodo.getDerechoFalse(), grafo, nuevoId);
             grafo.addEdge(id + "-" + nuevoId, id, nuevoId);       
         }
+    }
+    
+    
+    public void agregarEspecieATabla(String nombre, Nodo nodo) {
+        tablaEspecies.insertar(nombre, nodo);
+    }
+    
+    public Nodo buscarPorHash(String nombre) {
+        return tablaEspecies.buscar(nombre);
     }
     
     

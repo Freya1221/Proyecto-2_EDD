@@ -116,18 +116,21 @@ public class Inicio extends javax.swing.JFrame {
             Nodo respuesta = null;
             String[] historial = { "" };
             long inicio = System.nanoTime();
+            String respuestaaa = null;
             if (BusquedaArbol.isSelected()) {
                 //Busqueda por Arbol
                 respuesta = AB.buscarNodo(AB.getRaiz(),valorPorBuscar, historial);
+                respuestaaa = "Nodo encontrado: " + respuesta.getPregunta() + "\n\nHistorial de preguntas:\n" + historial[0];
             } else if (BusquedaHash.isSelected()) {
                 //Busqueda por Hash
+                respuesta = AB.buscarPorHash(valorPorBuscar);
+                respuestaaa = "Nodo encontrado: " + respuesta.getPregunta();
             }
-            System.out.println(respuesta);
+            //System.out.println(respuesta);
             long fin = System.nanoTime();
             long tiempoTranscurrido = fin - inicio;
             
-            System.out.println(historial);
-            String respuestaaa = "Nodo encontrado: " + respuesta.getPregunta() + "\n\nHistorial de preguntas:\n" + historial[0];
+            
             Resultados r = new Resultados(respuestaaa, tiempoTranscurrido);
             r.setVisible(true);
         }
