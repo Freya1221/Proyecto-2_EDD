@@ -109,30 +109,35 @@ public class ArbolBinario {
     }
     
     public void preguntar(Inicio pantalla, Nodo nodo, String historial){
-        if (nodo.getDerechoFalse() == null && nodo.getIzquierdoTrue() == null){
+        if (nodo == null){
+            JOptionPane.showMessageDialog(pantalla, "No hay conicidencia con tu descripcion");
+        }else{
             
-            String encontrado = nodo.getPregunta();
-            encontrado = "Arbol encontrado:\n" + encontrado + "\n\nPreguntas:" + historial;
-            JOptionPane.showMessageDialog(pantalla, encontrado);
-        } else{
-            
-            String encontrado = nodo.getPregunta();
-            int respuesta = JOptionPane.showConfirmDialog(
-                pantalla,
-                encontrado,
-                "Clave Dicotómica",
-                JOptionPane.YES_NO_OPTION
-            );
         
-            
-            if (respuesta == JOptionPane.YES_OPTION) {
-                historial = historial + "\n" + encontrado + ": True";
-                nodo = nodo.getIzquierdoTrue();
-                preguntar(pantalla, nodo, historial);
-            } else if (respuesta == JOptionPane.NO_OPTION) {
-                historial = historial + "\n" + encontrado + ": False";
-                nodo = nodo.getDerechoFalse();
-                preguntar(pantalla, nodo, historial);
+            if (nodo.getDerechoFalse() == null && nodo.getIzquierdoTrue() == null){
+                String encontrado = nodo.getPregunta();
+                encontrado = "Arbol encontrado:\n" + encontrado + "\n\nPreguntas:" + historial;
+                JOptionPane.showMessageDialog(pantalla, encontrado);
+            } else{
+
+                String encontrado = nodo.getPregunta();
+                int respuesta = JOptionPane.showConfirmDialog(
+                    pantalla,
+                    encontrado,
+                    "Clave Dicotómica",
+                    JOptionPane.YES_NO_OPTION
+                );
+
+
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    historial = historial + "\n" + encontrado + ": True";
+                    nodo = nodo.getIzquierdoTrue();
+                    preguntar(pantalla, nodo, historial);
+                } else if (respuesta == JOptionPane.NO_OPTION) {
+                    historial = historial + "\n" + encontrado + ": False";
+                    nodo = nodo.getDerechoFalse();
+                    preguntar(pantalla, nodo, historial);
+                }
             }
         }
     }
