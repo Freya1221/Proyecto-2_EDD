@@ -14,7 +14,12 @@ public class Nodo {
     private Nodo derechoFalse;      // Hijo derecho
     private String especie; // Solo en nodos hoja
     
-    // Constructor
+    /**
+     * Construye un nuevo nodo con una pregunta/característica
+     * 
+     * @param pregunta Texto de la pregunta o característica biológica. Para nodos hoja, puede ser el nombre de una especie.
+     *                 
+     */
     public Nodo(String pregunta) {
         this.pregunta = pregunta;
         this.izquierdoTrue = null;
@@ -56,9 +61,10 @@ public class Nodo {
     }
     
     /**
-    * Verifica si este nodo es una hoja en el árbol.
-    *
-    */
+     * Determina si el nodo es una hoja (nodo terminal)
+     * 
+     * @return true si es un nodo hoja, false en caso contrario
+     */
     public boolean esHoja() {
         return (izquierdoTrue == null && derechoFalse == null) || especie != null;
     }

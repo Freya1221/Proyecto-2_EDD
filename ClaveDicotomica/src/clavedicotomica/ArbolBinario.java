@@ -14,6 +14,13 @@ import org.graphstream.graph.Node;
  * @author Freya Blanca, Jesús Schneider, Marcelo Pineiro
  */
 public class ArbolBinario {
+    
+    
+    /**
+     * Construye un árbol binario vacío
+     * Inicializa la raíz como nula y crea una nueva tabla hash para especies
+     * 
+     */
     private Nodo raiz;  // Raíz del árbol
     private TablaHash tablaEspecies;
 
@@ -23,18 +30,25 @@ public class ArbolBinario {
         this.tablaEspecies = new TablaHash();
     }
     
+    
     public boolean existeNodo(String dato) {
         return buscar(raiz, dato) != null;
     }
 
-    // Insertar nodos manualmente
+    /**
+     * Inserta un nuevo nodo en el árbol
+     * 
+     * @param dato Contenido del nodo a insertar
+     * @param respuestaPadre Pregunta del nodo padre para ubicación
+     * @param esHijoIzquierdo true para hijo izquierdo (True), false para derecho (False)
+     */
     public void insertar(String dato, String respuestaPadre, boolean esHijoIzquierdo) {
         // Verificar si el nodo ya existe
         if (existeNodo(dato)) {
             //System.out.println("El nodo ya existe: " + dato);
             return;
         }
-
+        
         Nodo nuevoNodo = new Nodo(dato);
         if (raiz == null) {
             raiz = nuevoNodo; // Si el árbol está vacío, el nuevo nodo es la raíz
@@ -54,7 +68,15 @@ public class ArbolBinario {
         }
     }
 
-    //Buscar un nodo por su dato (recorrido preorden)
+    
+    /**
+     * Búsqueda recursiva con registro de historial
+     * 
+     * @param actual Nodo actual en la búsqueda
+     * @param dato Valor a buscar
+     * @param historial Arreglo para almacenar el camino de búsqueda
+     * @return Nodo encontrado o null
+     */
     public Nodo buscarNodo(Nodo actual, String dato, String[] historial) {
         if (actual == null) {
             return null; // Nodo no encontrado
@@ -82,7 +104,13 @@ public class ArbolBinario {
         return null;
     }
     
-    
+    /**
+     * Búsqueda recursiva simple en preorden
+     * 
+     * @param actual Nodo actual en la búsqueda
+     * @param dato Valor a buscar
+     * @return Nodo encontrado o null
+     */
     public Nodo buscar(Nodo actual, String dato) {
         if (actual == null) {
             return null;
@@ -99,7 +127,11 @@ public class ArbolBinario {
         return buscar(actual.getDerechoFalse(), dato);
     }
 
-    // Recorrer el árbol (Preorden)
+    /**
+     * Recorrer el árbol (Preorden)
+     * 
+     * @param nodo Nodo actual en el cuestionario
+     */
     public void recorrerPreorden(Nodo nodo) {
         if (nodo != null) {
             //System.out.println(nodo.getPregunta());
@@ -108,6 +140,13 @@ public class ArbolBinario {
         }
     }
     
+    /**
+     * Proceso interactivo de determinación de especies
+     * 
+     * @param pantalla Referencia a la ventana principal
+     * @param nodo Nodo actual en el cuestionario
+     * @param historial Registro acumulado de preguntas/respuestas
+     */
     public void preguntar(Inicio pantalla, Nodo nodo, String historial){
         if (nodo == null){
             JOptionPane.showMessageDialog(pantalla, "No hay conicidencia con tu descripcion");

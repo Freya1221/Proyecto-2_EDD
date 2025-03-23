@@ -14,7 +14,7 @@ import org.graphstream.ui.view.Viewer;
 
 /**
  *
- * @author adcd_
+ * @author Freya Blanca, Jesús Schneider, Marcelo Pineiro
  */
 public class Inicio extends javax.swing.JFrame {
 
