@@ -109,6 +109,7 @@ public class Inicio extends javax.swing.JFrame {
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         String valorPorBuscar = InputBuscar.getText();
+        valorPorBuscar = Character.toUpperCase(valorPorBuscar.charAt(0)) + valorPorBuscar.substring(1).toLowerCase();
         if (valorPorBuscar.isEmpty() || valorPorBuscar.contains(" ")) {
             JOptionPane.showMessageDialog(this, "Texto inválido", "Error", JOptionPane.ERROR_MESSAGE);
         }else{
@@ -116,23 +117,36 @@ public class Inicio extends javax.swing.JFrame {
             Nodo respuesta = null;
             String[] historial = { "" };
             long inicio = System.nanoTime();
-            String respuestaaa = null;
-            if (BusquedaArbol.isSelected()) {
-                //Busqueda por Arbol
-                respuesta = AB.buscarNodo(AB.getRaiz(),valorPorBuscar, historial);
-                respuestaaa = "Nodo encontrado: " + respuesta.getPregunta() + "\n\nHistorial de preguntas:\n" + historial[0];
-            } else if (BusquedaHash.isSelected()) {
-                //Busqueda por Hash
-                respuesta = AB.buscarPorHash(valorPorBuscar);
-                respuestaaa = "Nodo encontrado: " + respuesta.getPregunta();
+            try {
+                if (BusquedaArbol.isSelected()) {
+                    respuesta = AB.buscarNodo(AB.getRaiz(), valorPorBuscar, historial);
+                } else if (BusquedaHash.isSelected()) {
+                    respuesta = AB.buscarPorHash(valorPorBuscar); // Asume que este método existe
+                }
+
+                long fin = System.nanoTime();
+                long tiempoTranscurrido = fin - inicio;
+
+                String resultadoTexto;
+                if (respuesta != null) {
+                    resultadoTexto = "Nodo encontrado: " + respuesta.getPregunta() 
+                                    + "\n\nHistorial de preguntas:\n" + historial[0];
+                } else {
+                    resultadoTexto = "No se encontró la especie: " + valorPorBuscar;
+                }
+
+                // Mostrar siempre la interfaz de resultados
+                Resultados r = new Resultados(resultadoTexto, tiempoTranscurrido);
+                r.setVisible(true);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, 
+                    "Error durante la búsqueda: " + e.getMessage(), 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE
+                );
             }
-            //System.out.println(respuesta);
-            long fin = System.nanoTime();
-            long tiempoTranscurrido = fin - inicio;
-            
-            
-            Resultados r = new Resultados(respuestaaa, tiempoTranscurrido);
-            r.setVisible(true);
+
         }
         
     }//GEN-LAST:event_BuscarActionPerformed

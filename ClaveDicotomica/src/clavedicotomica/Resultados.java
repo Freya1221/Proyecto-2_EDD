@@ -15,19 +15,25 @@ public class Resultados extends javax.swing.JFrame {
      */
     String respuesta;
     public Resultados(String respuesta, long tiempoTranscurrido) {
-        this.respuesta = respuesta;
         initComponents();
-        setLocationRelativeTo(null); //CEntrar ventana
+        setLocationRelativeTo(null);
         
-        double segundos = tiempoTranscurrido / 1_000_000_000.0;
-        String var = "Tipo de busqueda: " + segundos;
-        tiempo.setText(var);
-        if (respuesta != null){
-            TextoResultado.setText(respuesta);
-            TextoResultado.setEditable(false);
-            TextoResultado.setLineWrap(true);
-            TextoResultado.setWrapStyleWord(true);
+        String textoAMostrar = "No se encontraron resultados";
+        
+        if (respuesta != null && !respuesta.isEmpty()) {
+            textoAMostrar = respuesta;
         }
+        
+        // Convertir tiempo a segundos con formato
+        double segundos = tiempoTranscurrido / 1_000_000_000.0;
+        String tiempoTexto = String.format("Tiempo: %.6f segundos", segundos);
+        
+        // Actualizar componentes
+        tiempo.setText(tiempoTexto);
+        TextoResultado.setText(textoAMostrar);
+        TextoResultado.setEditable(false);
+        TextoResultado.setLineWrap(true);
+        TextoResultado.setWrapStyleWord(true);
     }
 
     /**
