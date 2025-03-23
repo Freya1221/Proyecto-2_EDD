@@ -89,6 +89,14 @@ public class Home extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    /**
+     * Maneja la acción de carga de archivo JSON
+     * 
+     * @param evt Evento de acción del botón de carga
+     * @throws JsonException Si hay errores en la sintaxis JSON
+     * @throws Exception Para otros errores de lectura/archivo
+     */
     private void CargarArbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarArbolActionPerformed
         JFileChooser fileChooser = new JFileChooser();   
         // Filtro para solo archivos JSON
