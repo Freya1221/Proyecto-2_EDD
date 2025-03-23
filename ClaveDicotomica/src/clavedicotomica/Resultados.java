@@ -14,12 +14,17 @@ public class Resultados extends javax.swing.JFrame {
      * Creates new form Resultados
      */
     Nodo respuesta;
-    public Resultados(Nodo respuesta) {
+    public Resultados(Nodo respuesta, long tiempoTranscurrido) {
         this.respuesta = respuesta;
         initComponents();
         setLocationRelativeTo(null); //CEntrar ventana
         
-        TextoResultado.setText(respuesta.getPregunta());
+        double segundos = tiempoTranscurrido / 1_000_000_000.0;
+        String var = "Tipo de busqueda: " + segundos;
+        tiempo.setText(var);
+        if (respuesta != null){
+            TextoResultado.setText(respuesta.getPregunta());
+        }
     }
 
     /**
@@ -35,6 +40,7 @@ public class Resultados extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         Close = new javax.swing.JButton();
         TextoResultado = new javax.swing.JLabel();
+        tiempo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -43,7 +49,7 @@ public class Resultados extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Resultados");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, -1, 40));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, -1, 40));
 
         Close.setBackground(new java.awt.Color(255, 0, 0));
         Close.setText("X");
@@ -56,7 +62,11 @@ public class Resultados extends javax.swing.JFrame {
 
         TextoResultado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         TextoResultado.setText("No se encontraron resultados");
-        jPanel1.add(TextoResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+        jPanel1.add(TextoResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
+
+        tiempo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tiempo.setText("Tipo de busqueda: ");
+        jPanel1.add(tiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 250, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 320));
 
@@ -98,7 +108,10 @@ public class Resultados extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Nodo respuesta = new Nodo("");
-                new Resultados(respuesta).setVisible(true);
+                long inicio = System.nanoTime();
+                long fin = System.nanoTime();
+                long tiempoTranscurrido = fin - inicio;
+                new Resultados(respuesta, tiempoTranscurrido).setVisible(true);
             }
         });
     }
@@ -108,5 +121,6 @@ public class Resultados extends javax.swing.JFrame {
     private javax.swing.JLabel TextoResultado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel tiempo;
     // End of variables declaration//GEN-END:variables
 }

@@ -114,14 +114,16 @@ public class Inicio extends javax.swing.JFrame {
         }else{
             InputBuscar.setText("");
             Nodo respuesta = null;
+            long inicio = System.nanoTime();
             if (BusquedaArbol.isSelected()) {
                 //Busqueda por Arbol
                 respuesta = AB.buscar(AB.getRaiz(),valorPorBuscar);
             } else if (BusquedaHash.isSelected()) {
                 //Busqueda por Hash
             }
-
-            Resultados r = new Resultados(respuesta);
+            long fin = System.nanoTime();
+            long tiempoTranscurrido = fin - inicio;
+            Resultados r = new Resultados(respuesta, tiempoTranscurrido);
             r.setVisible(true);
         }
         
