@@ -6,6 +6,12 @@ package clavedicotomica;
 
 import javax.swing.JOptionPane;
 
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.implementations.SingleGraph;
+import org.graphstream.ui.layout.HierarchicalLayout;
+import org.graphstream.ui.view.Viewer;
+//import org.graphstream.ui.layout.util.LayoutOrientation;
+
 /**
  *
  * @author adcd_
@@ -122,7 +128,33 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void MostrarArbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarArbolActionPerformed
-        // TODO add your handling code here:
+        // Configurar GraphStream
+        System.setProperty("org.graphstream.ui", "swing");
+        Graph grafo = new SingleGraph("Clave Dicotómica");
+        
+        // Estilos avanzados
+        grafo.setAttribute("ui.stylesheet", 
+            "node {"
+            + "   fill-color: #B3C9C0;"
+            + "   size: 40px;"
+            + "   text-size: 14px;"
+            + "   text-alignment: center;"
+            + "   stroke-mode: plain;"
+            + "   stroke-color: #3A6351;"
+            + "}"
+            + "edge {"
+            + "   fill-color: #3A6351;"
+            + "   size: 2px;"
+            + "}");
+        
+        // Construir el gráfico
+        AB.construirGrafo(AB.getRaiz(), grafo, "0");
+        
+        // Mostrar con diseño jerárquico
+        Viewer viewer = grafo.display();
+        HierarchicalLayout layout = new HierarchicalLayout();
+        //layout.setOrientation(LayoutOrientation.TOP_TO_BOTTOM); // Raíz arriba
+        //viewer.enableAutoLayout(layout);
     }//GEN-LAST:event_MostrarArbolActionPerformed
 
     private void DeterminarEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeterminarEspecieActionPerformed

@@ -6,6 +6,9 @@ package clavedicotomica;
 
 import javax.swing.JOptionPane;
 
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.Node;
+
 /**
  *
  * @author Freya Blanca, Jesús Schneider, Marcelo Pineiro
@@ -109,6 +112,29 @@ public class ArbolBinario {
                 nodo = nodo.getDerechoFalse();
                 preguntar(pantalla, nodo, historial);
             }
+        }
+    }
+    
+    
+    public static void construirGrafo(Nodo nodo, Graph grafo, String id) {
+        if (nodo == null) return;
+
+        // Crear nodo actual con su pregunta
+        Node nodoGrafico = grafo.addNode(id);
+        nodoGrafico.setAttribute("ui.label", nodo.getPregunta());
+
+        // Hijo izquierdo (True)
+        if (nodo.getIzquierdoTrue() != null) {
+            String nuevoId = id + "T";
+            construirGrafo(nodo.getIzquierdoTrue(), grafo, nuevoId); 
+            grafo.addEdge(id + "-" + nuevoId, id, nuevoId);          
+        }
+
+        // Hijo derecho (False)
+        if (nodo.getDerechoFalse() != null) {
+            String nuevoId = id + "F";
+            construirGrafo(nodo.getDerechoFalse(), grafo, nuevoId);
+            grafo.addEdge(id + "-" + nuevoId, id, nuevoId);       
         }
     }
     
