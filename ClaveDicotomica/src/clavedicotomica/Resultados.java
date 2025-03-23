@@ -11,7 +11,10 @@ package clavedicotomica;
 public class Resultados extends javax.swing.JFrame {
 
     /**
-     * Creates new form Resultados
+     * Crea una nueva instancia de la ventana de resultados.
+     * 
+     * @param respuesta El texto del resultado de la búsqueda. Si es nulo o vacío, se mostrará un mensaje por defecto.
+     * @param tiempoTranscurrido El tiempo de ejecución en nanosegundos que duro la búsqueda.
      */
     String respuesta;
     public Resultados(String respuesta, long tiempoTranscurrido) {
@@ -86,6 +89,11 @@ public class Resultados extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método de cierre de la ventana. Libera los recursos de la ventana cuando se hace clic en el botón de cerrar.
+     * 
+     * @param evt Evento de acción generado por el botón de cierre.
+     */
     private void CloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseActionPerformed
         this.dispose();
     }//GEN-LAST:event_CloseActionPerformed

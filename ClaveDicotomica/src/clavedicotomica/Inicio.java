@@ -19,9 +19,10 @@ import org.graphstream.ui.view.Viewer;
 public class Inicio extends javax.swing.JFrame {
 
     /**
-     * Creates new form Inicio
+     * Construye una nueva ventana principal asociada a un árbol binario
+     * 
+     * @param AB Árbol binario previamente inicializado que contendrá los datos
      */
-    
     private ArbolBinario AB;
     public Inicio(ArbolBinario AB) {
         this.AB = AB;
@@ -117,6 +118,15 @@ public class Inicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    /**
+     * Maneja la acción de búsqueda de especies
+     * Realiza validación de entrada y ejecuta la búsqueda según el método seleccionado.
+     * Muestra resultados en ventana emergente.
+     * 
+     * @param evt Evento de acción del botón buscar
+     * @throws Exception Si ocurre un error durante la búsqueda
+     */
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         String valorPorBuscar = InputBuscar.getText();
         valorPorBuscar = Character.toUpperCase(valorPorBuscar.charAt(0)) + valorPorBuscar.substring(1).toLowerCase();
@@ -161,6 +171,14 @@ public class Inicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_BuscarActionPerformed
 
+    
+    /**
+     * Genera y muestra una representación gráfica del árbol binario
+     * Utiliza la librería GraphStream para crear una visualización interactiva
+     * con estilo jerárquico y diseño personalizado.
+     * 
+     * @param evt Evento de acción del botón mostrar árbol
+     */
     private void MostrarArbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarArbolActionPerformed
         // Configurar GraphStream
         System.setProperty("org.graphstream.ui", "swing");
@@ -190,12 +208,24 @@ public class Inicio extends javax.swing.JFrame {
         //layout.setOrientation(LayoutOrientation.TOP_TO_BOTTOM); // Raíz arriba
         //viewer.enableAutoLayout(layout);
     }//GEN-LAST:event_MostrarArbolActionPerformed
-
+    
+    
+     /**
+     * Inicia el proceso interactivo de determinación de especies
+     * Realiza un recorrido guiado del árbol binario mediante preguntas al usuario hasta llegar a una hoja (especie determinada).
+     * 
+     * @param evt Evento de acción del botón determinar especie
+     */
     private void DeterminarEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeterminarEspecieActionPerformed
         String historial = "";
         AB.preguntar(this, AB.getRaiz(), historial);
     }//GEN-LAST:event_DeterminarEspecieActionPerformed
 
+     /**
+     * Cierra la ventana actual y regresa a la pantalla de inicio
+     * 
+     * @param evt Evento de acción del botón cerrar
+     */
     private void CloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseActionPerformed
         Home h = new Home();
         h.setVisible(true);
