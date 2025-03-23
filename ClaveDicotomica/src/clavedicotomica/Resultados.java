@@ -13,8 +13,8 @@ public class Resultados extends javax.swing.JFrame {
     /**
      * Creates new form Resultados
      */
-    Nodo respuesta;
-    public Resultados(Nodo respuesta, long tiempoTranscurrido) {
+    String respuesta;
+    public Resultados(String respuesta, long tiempoTranscurrido) {
         this.respuesta = respuesta;
         initComponents();
         setLocationRelativeTo(null); //CEntrar ventana
@@ -23,7 +23,10 @@ public class Resultados extends javax.swing.JFrame {
         String var = "Tipo de busqueda: " + segundos;
         tiempo.setText(var);
         if (respuesta != null){
-            TextoResultado.setText(respuesta.getPregunta());
+            TextoResultado.setText(respuesta);
+            TextoResultado.setEditable(false);
+            TextoResultado.setLineWrap(true);
+            TextoResultado.setWrapStyleWord(true);
         }
     }
 
@@ -39,8 +42,9 @@ public class Resultados extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         Close = new javax.swing.JButton();
-        TextoResultado = new javax.swing.JLabel();
         tiempo = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TextoResultado = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -60,13 +64,16 @@ public class Resultados extends javax.swing.JFrame {
         });
         jPanel1.add(Close, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
 
-        TextoResultado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        TextoResultado.setText("No se encontraron resultados");
-        jPanel1.add(TextoResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
-
         tiempo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tiempo.setText("Tipo de busqueda: ");
         jPanel1.add(tiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 250, -1));
+
+        TextoResultado.setColumns(20);
+        TextoResultado.setRows(5);
+        TextoResultado.setText("No se encontraron resultados");
+        jScrollPane1.setViewportView(TextoResultado);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 360, 190));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 320));
 
@@ -107,7 +114,7 @@ public class Resultados extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Nodo respuesta = new Nodo("");
+                String respuesta = "";
                 long inicio = System.nanoTime();
                 long fin = System.nanoTime();
                 long tiempoTranscurrido = fin - inicio;
@@ -118,9 +125,10 @@ public class Resultados extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Close;
-    private javax.swing.JLabel TextoResultado;
+    private javax.swing.JTextArea TextoResultado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel tiempo;
     // End of variables declaration//GEN-END:variables
 }

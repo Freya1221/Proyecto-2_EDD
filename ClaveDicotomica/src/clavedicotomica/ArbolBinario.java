@@ -53,11 +53,31 @@ public class ArbolBinario {
     }
 
     //Buscar un nodo por su dato (recorrido preorden)
-    private Nodo buscarNodo(Nodo actual, String dato) {
-        if (actual == null) return null;
-        if (actual.getPregunta().equals(dato)) return actual;
-        Nodo encontradoIzq = buscarNodo(actual.getIzquierdoTrue(), dato);
-        return (encontradoIzq != null) ? encontradoIzq : buscarNodo(actual.getDerechoFalse(), dato);
+    public Nodo buscarNodo(Nodo actual, String dato, String[] historial) {
+        if (actual == null) {
+            return null; // Nodo no encontrado
+        }
+
+        // Si encontramos el nodo, retornamos el nodo
+        if (actual.getPregunta().equals(dato)) {
+            return actual;
+        }
+
+        // Buscar en el subárbol izquierdo (True)
+        Nodo encontradoIzq = buscarNodo(actual.getIzquierdoTrue(), dato, historial);
+        if (encontradoIzq != null) {
+            historial[0] += actual.getPregunta() + ": True\n"; // Añadir pregunta y respuesta al historial
+            return encontradoIzq;
+        }
+
+        // Buscar en el subárbol derecho (False)
+        Nodo encontradoDer = buscarNodo(actual.getDerechoFalse(), dato, historial);
+        if (encontradoDer != null) {
+            historial[0] += actual.getPregunta() + ": False\n"; // Añadir pregunta y respuesta al historial
+            return encontradoDer;
+        }
+
+        return null;
     }
     
     
