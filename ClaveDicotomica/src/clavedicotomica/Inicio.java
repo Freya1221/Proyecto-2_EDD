@@ -49,6 +49,7 @@ public class Inicio extends javax.swing.JFrame {
         BusquedaHash = new javax.swing.JRadioButton();
         BusquedaArbol = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
+        Close = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -101,6 +102,15 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel3.setText("Metodo de busqueda:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, -1, -1));
+
+        Close.setBackground(new java.awt.Color(255, 0, 0));
+        Close.setText("X");
+        Close.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CloseActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Close, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 480));
 
@@ -186,6 +196,12 @@ public class Inicio extends javax.swing.JFrame {
         AB.preguntar(this, AB.getRaiz(), historial);
     }//GEN-LAST:event_DeterminarEspecieActionPerformed
 
+    private void CloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseActionPerformed
+        Home h = new Home();
+        h.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_CloseActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -226,6 +242,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton Buscar;
     private javax.swing.JRadioButton BusquedaArbol;
     private javax.swing.JRadioButton BusquedaHash;
+    private javax.swing.JButton Close;
     private javax.swing.JButton DeterminarEspecie;
     private javax.swing.JTextField InputBuscar;
     private javax.swing.JButton MostrarArbol;
