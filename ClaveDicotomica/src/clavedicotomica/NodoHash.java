@@ -13,6 +13,12 @@ public class NodoHash {
     Nodo valor;
     NodoHash siguiente;
 
+    /**
+     * Construye un nuevo nodo para la tabla hash
+     * 
+     * @param clave Identificador único de la especie
+     * @param valor Nodo del árbol binario asociado a la especie
+     */
     public NodoHash(String clave, Nodo valor) {
         this.clave = clave;
         this.valor = valor;
